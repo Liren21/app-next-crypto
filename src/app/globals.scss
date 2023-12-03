@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+.input:focus {
+  outline-style: none;
+}
+.textarea-disabled, .textarea:disabled, .textarea[disabled] {
+  cursor: pointer;
+}

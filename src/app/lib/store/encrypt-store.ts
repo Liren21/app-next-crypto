@@ -1,31 +1,34 @@
 import {makeAutoObservable} from 'mobx'
 
 
-interface ISearchStateStore {
-    encryptionValue:string
-    decryption:string
-    outputValue:string
+interface IEncryptStore {
+    text:string
+    key:string
+    output:string
+
 }
 
-class EncryptionStateStore implements ISearchStateStore {
-    encryptionValue =''
-    decryption =''
-    outputValue =''
+class EncryptStore implements IEncryptStore {
+    text =''
+    key =''
+    output =''
+
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    setEncryptionValue(val: string) {
-        this.encryptionValue = val
+    setText(val: string) {
+        this.text = val
     }
-    setDecryption(val: string) {
-        this.decryption = val
+    setKey(val: string) {
+        this.key = val
     }
-    setOutputValue(val: any) {
-        this.outputValue = val
+    setOutput(val: any) {
+        this.output = val
     }
+
 
 }
 
-export default new EncryptionStateStore()
+export default new EncryptStore()
