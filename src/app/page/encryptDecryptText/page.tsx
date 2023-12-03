@@ -12,20 +12,31 @@ function EncryptDecryptText() {
     useEffect(() => {
 
         if (encryptStore.text.length !== 0 && encryptStore.key.length !== 0) {
-            encryptStore.setOutput(CryptoJS.Rabbit.encrypt(encryptStore.text, encryptStore.key))
+            state ?
+                encryptStore.setOutput(CryptoJS.Rabbit.encrypt(encryptStore.text, encryptStore.key))
+                :
+                encryptStore.setOutput(CryptoJS.Rabbit.decrypt(encryptStore.text, encryptStore.key))
         } else {
             encryptStore.setOutput('')
         }
     }, [encryptStore.text, encryptStore.key])
     return (
         <>
-            <div className="dropdown dropdown-bottom">
-                <div tabIndex={0} role="button" className="btn m-1">{!state?"Зашифровать":"Расшифровать"}</div>
-                <ul tabIndex={0}
-                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                    <li onClick={() => setState(true)}><a>Зашифровать</a></li>
-                    <li onClick={() => setState(false)}><a>Расшифровать</a></li>
-                </ul>
+            <div role="tablist" className="tabs tabs-boxed mb-8">
+                <a onClick={() => setState(true)} role="tab" className={`tab ${state && "tab-active"}`}>
+                    <svg style={{marginRight:'10px'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                         stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round"
+                              d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
+                    </svg>
+                    Зашифровать</a>
+                <a onClick={() => setState(false)} role="tab" className={`tab ${!state && "tab-active"}`}>
+                    <svg style={{marginRight:'10px'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                         stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round"
+                              d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
+                    </svg>
+                    Расшифровать</a>
             </div>
 
             {
