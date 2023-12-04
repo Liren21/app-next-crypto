@@ -2,16 +2,16 @@ import {makeAutoObservable} from 'mobx'
 
 
 interface IEncryptStore {
-    text:string
-    key:string
-    output:string
+    text: string
+    key: string
+    output: string
 
 }
 
 class EncryptStore implements IEncryptStore {
-    text =''
-    key =''
-    output =''
+    text = ''
+    key = ''
+    output = ''
 
 
     constructor() {
@@ -21,10 +21,12 @@ class EncryptStore implements IEncryptStore {
     setText(val: string) {
         this.text = val
     }
+
     setKey(val: string) {
         this.key = val
     }
-    setOutput(val: any) {
+
+    setOutput(val: string) {
         this.output = val
     }
 

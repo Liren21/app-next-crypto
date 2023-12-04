@@ -1,17 +1,20 @@
 'use client'
 import React from 'react';
 import Link from "next/link";
+import appStore from "@/app/lib/store/app-store";
+import {observer} from "mobx-react-lite";
 
 
 interface IDrawer {
     children: React.ReactNode
 }
 
-export const Drawer = ({children}: IDrawer) => {
+export const Drawer = observer(({children}: IDrawer) => {
 
 
     const data = [
         {
+            id: 1,
             href: '/page/encryptDecryptFile',
             icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                        stroke="currentColor" className="w-6 h-6">
@@ -21,6 +24,7 @@ export const Drawer = ({children}: IDrawer) => {
             title: ' Шифрование/Дешифрование файла'
         },
         {
+            id: 2,
             href: '/page/encryptDecryptText',
             icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                        stroke="currentColor" className="w-6 h-6">
@@ -43,8 +47,8 @@ export const Drawer = ({children}: IDrawer) => {
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-60 min-h-full bg-base-200 text-base-content">
                     {
-                        data.map((item) => (
-                            <li >
+                        data.map((item,index) => (
+                            <li key={`draw-${index}`} className={item.id === appStore.page ? 'bg-base-300 rounded-md' : 'rounded-md'}>
                                 <Link href={item.href}>
                                     {item.icon}
                                     {item.title}
@@ -57,5 +61,5 @@ export const Drawer = ({children}: IDrawer) => {
             </div>
         </div>
     );
-};
+})
 
